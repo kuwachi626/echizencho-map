@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>マーカの設置</title>
+  <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css"/>
+  <style>
+    #mapDiv{position:absolute;top:5px;left:5px;right:5px;bottom:5px;}
+  </style>
+  <script>
+    let mapobj;
+    function init(){ 
+      const mypoint = [35.9769601391832, 136.12836899510026];  // 図中心
+      mapobj = L.map('mapDiv',{zoomControl:true}).setView(mypoint,14); //中心&ズーム値
+      L.control.scale({imperial:false}).addTo(mapobj);  // スケール(mのみ)を追加
+      L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+        attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+      }).addTo(mapobj);
+
+      omnivore.csv('spot.csv',
+        {latfield:'lat',lonfield:'lng',delimiter:','},
+        L.geoJson(null,
+        {pointToLayer:function(feature,latlng)
+        {let myIcon1 = L.icon({
+          iconUrl: feature.properties.icon,
+          iconSize: [27, 45],
+          iconAnchor: [14, 44]
+        });
+        return L.marker(latlng,{icon:myIcon1});},
+        onEachFeature:function(feature,layer)
+        {layer.bindPopup("<strong style='font-size: 120%;'><ruby>"+feature.properties['title']+"<rt>"+feature.properties['ruby']+"</rt></ruby></strong>"+
+        feature.properties['comment']
+        );}})).addTo(mapobj);
+    };
+  </script>
+</head>
+<body onload="init()">
+  <div id="mapDiv"></div>
+</body>
+</html>
