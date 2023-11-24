@@ -53,6 +53,7 @@ tick: function (time, delta) {
     if (
         !velocity[data.adAxis] &&
         !velocity[data.wsAxis] &&
+        !velocity[data.yAxis] &&
         isEmptyObject(this.buttons) 
     ) {
         return;
@@ -63,7 +64,7 @@ tick: function (time, delta) {
     this.updateVelocity(delta);
 
     // 計算の結果、速度が0になったなら何もしない
-    if (!velocity[data.adAxis] && !velocity[data.wsAxis]) {
+    if (!velocity[data.adAxis] && !velocity[data.wsAxis] && !velocity[data.yAxis]) {
         return;
     }
 
@@ -81,15 +82,18 @@ updateVelocity: function (delta) {
     let MAX_DELTA = this.MAX_DELTA
     let wsAxis;
     let wsSign;
+    let yAxis;
 
     adAxis = data.adAxis;
     wsAxis = data.wsAxis;
+    yAxis = data.yAxis;
 
     // velocity["x"]がx軸方向=横の速度 velocity["z"]が奥行き方向の速度
     // FPSが低すぎる場合は速度を0にする
     if (delta > MAX_DELTA) {
         velocity[adAxis] = 0;
         velocity[wsAxis] = 0;
+        velocity[yAxis] = 0;
         return;
     }
 
@@ -101,6 +105,9 @@ updateVelocity: function (delta) {
     if (velocity[wsAxis] !== 0) {
         velocity[wsAxis] = velocity[wsAxis] * scaledEasing;
     }
+    if (velocity[yAxis] !== 0) {
+        velocity[yAxis] = velocity[yAxis] * scaledEasing;
+    }
 
     // 減速の計算後、速度の絶対値がCLAMP_VELOCITYよりも小さいときは速度を0にして停止する
     if (Math.abs(velocity[adAxis]) < CLAMP_VELOCITY) {
@@ -108,6 +115,9 @@ updateVelocity: function (delta) {
     }
     if (Math.abs(velocity[wsAxis]) < CLAMP_VELOCITY) {
         velocity[wsAxis] = 0;
+    }
+    if (Math.abs(velocity[yAxis]) < CLAMP_VELOCITY) {
+        velocity[yAxis] = 0;
     }
 
     // schemeで定義したenabled がfalseに設定されている時は減速までで計算終了
@@ -137,6 +147,16 @@ updateVelocity: function (delta) {
         }
         if ( buttons.backBtn ) {
           velocity[wsAxis] += wsSign * acceleration * delta;
+        }
+    }
+
+    if (data.wsEnabled) {
+        wsSign = data.wsInverted ? -1 : 1;
+        if ( buttons.downBtn ) {
+          velocity[yAxis] -= wsSign * acceleration * delta;
+        }
+        if ( buttons.upBtn ) {
+          velocity[yAxis] += wsSign * acceleration * delta;
         }
     }
 },
@@ -207,5 +227,6 @@ update: function (oldData) {
     // Reset velocity if axis have changed.
     if (oldData.adAxis !== this.data.adAxis) { this.velocity[oldData.adAxis] = 0; }
     if (oldData.wsAxis !== this.data.wsAxis) { this.velocity[oldData.wsAxis] = 0; }
+    if (oldData.wsAxis !== this.data.yAxis) { this.velocity[oldData.yAxis] = 0; }
 },
 });
