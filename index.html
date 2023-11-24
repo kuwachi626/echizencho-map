@@ -33,9 +33,9 @@
         });
         return L.marker(latlng,{title:feature.properties.title, icon:myIcon1}).bindTooltip(feature.properties['title'],{direction:feature.properties['direction']});},
         onEachFeature:function(feature,layer)
-        {layer.bindPopup("<strong style='font-size: 150%;'><ruby>"+feature.properties['title']+"<rt>"+feature.properties['ruby']+"</rt></ruby></strong>"+
+        {layer.bindPopup("<strong style='font-size: 180%;'><ruby>"+feature.properties['title']+"<rt>"+feature.properties['ruby']+"</rt></ruby></strong>"+
         feature.properties['comment']
-        );}})).addTo(mapobj);
+        , {minWidth: 400});}})).addTo(mapobj);
     };
   </script>
 </head>
