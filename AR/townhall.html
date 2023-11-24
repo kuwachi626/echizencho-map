@@ -4,6 +4,8 @@
 <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
 
 <script type="module" src="../mc-controls.js"></script>
+<script type="module" src="../button-controls.js"></script>
+<link rel="stylesheet" href="btuui.css"/>
 </head>
 
 <body>
@@ -14,10 +16,31 @@
   <a-entity gltf-model="#base" position="0 0 -1.5" scale="1 1 1" rotation="0 0 0"></a-entity>
   <a-entity light="type: ambient; color: #FFF"></a-entity>
   <a-entity id="cameraRig" position="0 0 0">
-    <a-entity id="head" camera position="0 0 0" mc-controls look-controls x-drone-controls-mode2></a-entity>
+    <a-entity id="head" camera position="0 0 0" button-wasd-controls mc-controls look-controls x-drone-controls-mode2></a-entity>
     <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
     <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
     </a-entity>
 </a-scene>
+
+<div class="actions">
+  <div class="buttonUI">
+    <div class="blankbox"></div>
+    <button id="leftBtn" type="button" class="button">←</button>
+    <div class="blankbox"></div>
+    <button id="upBtn" type="button" class="button">前</button>
+  </div>
+  <div class="buttonUI">
+    <button id="forwardBtn" type="button" class="button">↑</button>    
+    <div class="blankbox"></div>
+    <button id="backBtn" type="button" class="button">↓</button>
+  </div>
+  <div class="buttonUI">
+    <div class="blankbox"></div>
+    <button id="rightBtn" type="button" class="button">→</button>
+    <div class="blankbox"></div>
+    <button id="downBtn" type="button" class="button">後</button>
+  </div>
+</div>
+
 </body>
 </html>

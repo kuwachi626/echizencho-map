@@ -1,0 +1,25 @@
+.actions {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    bottom: 3%;
+    left: 3%;
+}    
+.actions .buttonUI {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+.actions .button {
+    cursor: pointer;
+    background: #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    margin-right: 10px;
+    font-size: large;
+}
+.blankbox {
+    height: 40px;
+    width: 40px;
+}
