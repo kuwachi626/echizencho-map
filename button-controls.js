@@ -132,10 +132,10 @@ updateVelocity: function (delta) {
     // 奥行き方向の速度を算出 加速度 × 時間変化
     if (data.wsEnabled) {
         wsSign = data.wsInverted ? -1 : 1;
-        if ( buttons.upBtn ) {
+        if ( buttons.forwardBtn ) {
           velocity[wsAxis] -= wsSign * acceleration * delta;
         }
-        if ( buttons.downBtn ) {
+        if ( buttons.backBtn ) {
           velocity[wsAxis] += wsSign * acceleration * delta;
         }
     }
