@@ -1,5 +1,11 @@
+html, body, main { height: 100%; width: 100%; }
+
 a {
     text-decoration: none;
+}
+
+p {
+    font-size: 120%;
 }
 
 ul {
@@ -10,4 +16,25 @@ ul {
 li {
     display: inline;
     padding-right: 30px;
+}
+
+main {
+    display: grid;
+    /* grid-template-areas:
+    'map search'; */
+    grid-template-areas:
+    'map';
+    /* grid-auto-columns: 80% 20%; */
+}
+
+#mapDiv {
+    position: relative;
+    grid-area: map;
+    width: 100%;
+}
+
+#infomation {
+    grid-area: search;
+    width: 100%;
+    border: 1px;
 }

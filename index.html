@@ -9,9 +9,9 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css"/>
   <link rel="stylesheet" href="style.css"/>
-  <style>
+  <!-- <style>
     #mapDiv{position:absolute;top:5px;left:5px;right:5px;bottom:5px;}
-  </style>
+  </style> -->
   <script>
     let mapobj;
     function init(){ 
@@ -33,13 +33,16 @@
         });
         return L.marker(latlng,{title:feature.properties.title, icon:myIcon1}).bindTooltip(feature.properties['title'],{direction:feature.properties['direction']});},
         onEachFeature:function(feature,layer)
-        {layer.bindPopup("<strong style='font-size: 120%;'><ruby>"+feature.properties['title']+"<rt>"+feature.properties['ruby']+"</rt></ruby></strong>"+
+        {layer.bindPopup("<strong style='font-size: 150%;'><ruby>"+feature.properties['title']+"<rt>"+feature.properties['ruby']+"</rt></ruby></strong>"+
         feature.properties['comment']
         );}})).addTo(mapobj);
     };
   </script>
 </head>
 <body onload="init()">
-  <div id="mapDiv"></div>
+  <main>
+    <div id="mapDiv"></div>
+    <!-- <div id="infomation"></div> -->
+  </main>
 </body>
 </html>
