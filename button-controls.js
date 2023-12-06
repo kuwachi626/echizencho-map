@@ -38,10 +38,12 @@ init: function () {
     // 関数をthisでbind
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
-    this.attachMouseEventListners = this.attachMouseEventListners.bind(this);
+    this.ontouchstart = this.ontouchstart.bind(this);
+    this.ontouchend = this.ontouchend.bind(this);
+    this.attachEventListners = this.attachEventListners.bind(this);
 
     // イベントリスナーを一括登録
-    this.attachMouseEventListners()
+    this.attachEventListners()
 },
 
 tick: function (time, delta) {
@@ -198,27 +200,41 @@ onMouseDown: function (event) {
     this.buttons[pushedBtn] = true;
 },
 
+ontouchstart: function (event) {
+    let pushedBtn = event.srcElement.id;
+    this.buttons[pushedBtn] = true;
+},
+
 // ボタンからクリックが離れたら、そのボタンのフラグをfalseにする
 onMouseUp: function (event) {
     let releasedBtn = event.srcElement.id;
     delete this.buttons[releasedBtn];
 },
 
+ontouchend: function (event) {
+    let releasedBtn = event.srcElement.id;
+    delete this.buttons[releasedBtn];
+},
+
 // イベントリスナーをまとめて登録する
-attachMouseEventListners: function () {
+attachEventListners: function () {
     let buttonEles = this.buttonEles;
     for (const buttonEle of buttonEles) {
         buttonEle.addEventListener("mousedown", this.onMouseDown);
         buttonEle.addEventListener("mouseup", this.onMouseUp);
+        buttonEle.addEventListener("touchstart", this.ontouchstart);
+        buttonEle.addEventListener("touchend", this.ontouchend);
     }
 },
 
 // イベントリスナーをまとめて削除する
-removeMouseEventListeners: function () {
+removeEventListeners: function () {
     let buttonEles = this.buttonEles;
     for (const buttonEle of buttonEles) {
         buttonEle.removeEventListener("mousedown", this.onMouseDown);
         buttonEle.removeEventListener("mouseup", this.onMouseUp);
+        buttonEle.addEventListener("touchstart", this.ontouchstart);
+        buttonEle.addEventListener("touchend", this.ontouchend);
     }
 },
 
