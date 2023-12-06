@@ -4,7 +4,6 @@
 <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
 
 <script type="module" src="../mc-controls.js"></script>
-<script type="module" src="../button-controls.js"></script>
 <link rel="stylesheet" href="btuui.css"/>
 </head>
 
@@ -16,8 +15,7 @@
   <a-entity gltf-model="#base" position="0 0 -1.5" scale="1 1 1" rotation="0 30 0"></a-entity>
   <a-entity light="type: ambient; color: #FFF"></a-entity>
   <a-entity id="cameraRig" position="0 0 0">
-    <!-- <a-entity id="head" camera position="0 0 0" look-controls x-drone-controls-mode2></a-entity> -->
-    <a-entity id="head" camera position="0 0 0" button-wasd-controls mc-controls look-controls x-drone-controls-mode2></a-entity>
+    <a-entity id="head" camera position="0 0 0" mc-controls look-controls x-drone-controls-mode2></a-entity>
     <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
     <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
     </a-entity>
@@ -43,82 +41,5 @@
   </div>
 </div>
 
-<!-- <div class="actions">
-  <div class="buttonUI">
-    <div class="blankbox"></div>
-    <button id="leftBtn" type="button" class="button" onmousedown="startMoving('left')" onmouseup="stopMoving()" ontouchstart="startMoving('left')" ontouchend="stopMoving()">←</button>
-    <div class="blankbox"></div>
-    <button id="forwardBtn" type="button" class="button" onmousedown="startMoving('forward')" onmouseup="stopMoving()" ontouchstart="startMoving('forward')" ontouchend="stopMoving()">前</button>
-  </div>
-  <div class="buttonUI">
-    <button id="upBtn" type="button" class="button" onmousedown="startMoving('up')" onmouseup="stopMoving()" ontouchstart="startMoving('up')" ontouchend="stopMoving()">↑</button>    
-    <div class="blankbox"></div>
-    <button id="downBtn" type="button" class="button" onmousedown="startMoving('down')" onmouseup="stopMoving()" ontouchstart="startMoving('down')" ontouchend="stopMoving()">↓</button>
-  </div>
-  <div class="buttonUI">
-    <div class="blankbox"></div>
-    <button id="rightBtn" type="button" class="button" onmousedown="startMoving('right')" onmouseup="stopMoving()" ontouchstart="startMoving('right')" ontouchend="stopMoving()">→</button>
-    <div class="blankbox"></div>
-    <button id="backBtn" type="button" class="button" onmousedown="startMoving('backward')" onmouseup="stopMoving()" ontouchstart="startMoving('backward')" ontouchend="stopMoving()">後</button>
-  </div>
-</div> -->
-
-<!-- <script>
-  let interval;
-  let direction;
-  let step = 0.05; // 移動量を調整
-
-  function startMoving(dir) {
-    direction = dir;
-    interval = setInterval(moveObject, 50); // 50ミリ秒ごとに移動
-  }
-
-  function moveObject() {
-    var entity = document.getElementById('cameraRig');
-    var currentPosition = entity.getAttribute('position');
-
-    if (direction === 'forward') {
-      entity.setAttribute('position', {
-        x: currentPosition.x,
-        y: currentPosition.y,
-        z: currentPosition.z - step
-      });
-    } else if (direction === 'backward') {
-      entity.setAttribute('position', {
-        x: currentPosition.x,
-        y: currentPosition.y,
-        z: currentPosition.z + step
-      });
-    } else if (direction === 'left') {
-      entity.setAttribute('position', {
-        x: currentPosition.x - step,
-        y: currentPosition.y,
-        z: currentPosition.z
-      });
-    } else if (direction === 'right') {
-      entity.setAttribute('position', {
-        x: currentPosition.x + step,
-        y: currentPosition.y,
-        z: currentPosition.z
-      });
-    } else if (direction === 'up') {
-      entity.setAttribute('position', {
-        x: currentPosition.x,
-        y: currentPosition.y + step,
-        z: currentPosition.z
-      });
-    } else if (direction === 'down') {
-      entity.setAttribute('position', {
-        x: currentPosition.x,
-        y: currentPosition.y - step,
-        z: currentPosition.z
-      });
-    }
-  }
-
-  function stopMoving() {
-    clearInterval(interval);
-  }
-</script> -->
 </body>
 </html>
