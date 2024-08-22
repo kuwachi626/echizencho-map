@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HakusanShrine VR</title>
+	<meta name="description" content="360° Image - A-Frame">
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+</head>
+<body>
+	<a-scene>
+		<a-sky src="../img_360/YasakaShrine1_360.jpg" rotation="0 -90 0"></a-sky>
+        <a-assets>
+            <img id="thumb001" crossOrigin="anonymous" src="./img/HakusanShrine.jpg">
+            <!-- <img id="thumb002" crossOrigin="anonymous" src="../image/002.jpg">
+            <img id="thumb003" crossOrigin="anonymous" src="../image/003.jpg"> -->
+        </a-assets>
+        
+        <!-- <a-entity link="href: https://thomi40.github.io/aframe/082/sample-image-001/; title: My Homepage 002; image: #thumb001" position="0 1.2 -4"></a-entity> -->
+
+        <a-link href="./YasakaShrine2.html" title="My Homepage 001" image="#thumb001" position="0 1.2 -4"></a-link>
+
+        <!-- <a-link href="https://thomi40.github.io/aframe/082/sample-image-003/" title="My Homepage 003" image="#thumb003" position="4 1.2 -4"></a-link> -->
+
+
+      <a-entity camera look-controls wasd-controls>
+        <a-entity cursor="fuse: true;"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: blue; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
+               fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
+               fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+        </a-entity>
+      </a-entity>
+	</a-scene>
+</body>
+</html>
